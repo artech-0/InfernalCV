@@ -93,3 +93,4 @@ A Streamlit application that delivers brutally honest and sarcastically witty cr
 *   **PyPDF2:** For PDF text extraction.
 *   **python-docx:** For DOCX text extraction.
 *   **python-dotenv:** For managing environment variables.
+*   **ruff:** For linting and code quality checks.
