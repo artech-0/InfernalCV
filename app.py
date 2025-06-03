@@ -1,5 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from config import model_map
@@ -13,12 +14,23 @@ st.badge("Resume Review")
 st.markdown("Upload Your Resume and AI powered roasting")
 model = st.selectbox(
     "Which inference model do you want to run?",
-    ("qwen3 - 1.7b", "qwen3 - 4b", "Llama3 - 8b", "Deepseek-r1 8b", "Gemma3 - 27B", "Gemini 2.0 Flash Lite", "DeepSeek R1 - 0528", "Mistral"),
+    (
+        "qwen3 - 1.7b",
+        "qwen3 - 4b",
+        "Llama3 - 8b",
+        "Deepseek-r1 8b",
+        "Gemma3 - 27B",
+        "Gemini 2.0 Flash Lite",
+        "DeepSeek R1 - 0528",
+        "Mistral",
+    ),
     index=None,
     placeholder="Select Inference Model...",
 )
 
-uploaded_file = st.file_uploader("Upload your resume here (PDF, docx and txt only)", type=["pdf","txt","docx"])
+uploaded_file = st.file_uploader(
+    "Upload your resume here (PDF, docx and txt only)", type=["pdf", "txt", "docx"]
+)
 
 job_role = st.text_input("Enter the job role that you are targeting")
 analyse = st.button("Analyse Resume")
@@ -41,11 +53,12 @@ if analyse and uploaded_file and model:
                 response = generate_and_parse_answer(prompt, model_to_use)
                 print(f"Response from model {model_to_use}: {response}")
             st.markdown("### 🎤 AI Roasting Result 🎤")
-            
+
             st.markdown(response)
 
     except Exception as e:
         st.error(f"some error occured: {e}")
         import traceback
+
         print(f"Error details: {e}")
         traceback.print_exc()
